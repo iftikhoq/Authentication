@@ -3,6 +3,7 @@ from .forms import SignupForm, LoginForm
 from django.contrib import messages 
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm 
 from django.contrib.auth import login, authenticate, logout,update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 
 def Home(request):
     return render(request, 'index.html') 
@@ -43,15 +44,19 @@ def LoginPage(request):
     return render(request, 'login.html', {'form': form})
 
 
+@login_required
 def LogoutPage(request):
     logout(request)
     messages.success(request, "You have successfully logged out.")
     return redirect('home')
 
 
+@login_required
 def ProfilePage(request):
     return render(request, 'profile.html') 
 
+
+@login_required
 def Changepasswithprev(request):
     if request.method  ==  'POST':
         form = PasswordChangeForm(request.user, data = request.POST)
@@ -66,6 +71,8 @@ def Changepasswithprev(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'changepasswithprev.html', {'form': form}) 
 
+
+@login_required
 def Changepasswithoutprev(request):
     if request.method  ==  'POST':
         form = SetPasswordForm(request.user, data = request.POST)

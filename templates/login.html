@@ -1,17 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="toast-header">
-            <strong class="me-auto">Success</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
 
     <div class="container my-5" id="login">
         <div class="row justify-content-center">
